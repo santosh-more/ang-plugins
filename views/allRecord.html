@@ -1,0 +1,84 @@
+<div class="container" style="padding-top: 10px;">
+    <div class="row" style="padding-top: 10px;">
+        <div class="col-lg-10 col-sm-offset-1">
+            <div class="pull-left">
+                <button type="button" class="btn" ng-click="addRecordModal('lg')">Add Record</button>
+            </div>
+            <div class="pull-right">
+                <button type="button" class="btn" ng-click="dummyData()">Add Dummy data</button>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="padding-top: 10px;">
+        <div class="col-lg-10 col-sm-offset-1" style="width: 85%; overflow: auto;">
+            <table class="table table-bordered table-hover table-condensed">
+                <!-- ng-table="allRecordCtrl.tableParams" show-filter="true" -->
+                <tr style="font-weight: bold">
+                    <td style="width:35%">Name</td>
+                    <td style="width:20%">Email</td>
+                    <td style="width:20%">Date of Birth</td>
+                    <td style="width:25%">Contact</td>
+                    <td style="width:25%">Gender</td>
+                    <td style="width:25%">Country</td>
+                    <td style="width:25%">Hobbies</td>
+                    <td style="width:25%">Skills</td>
+                    <td style="width:25%">Actions</td>
+                </tr>
+                <tr ng-repeat="user in data" uib-popover="{{user.name}} you poped over" popover-trigger="'mouseenter'" popover-placement="top">
+                    <td style="width:35%" filter="{ name: 'text'}" sortable="'name'">
+                        <span editable-text="user.name" e-name="name" e-form="rowform" onbeforesave="" e-required>
+                    {{user.name}}
+                    </td>
+                    <td style="width:35%">
+                    <span editable-text="user.email" e-name="email" e-form="rowform" onbeforesave="" e-required>
+                    {{user.email}}
+
+                    </td>
+                    <td style="width:35%">
+                    <span editable-text="user.dob" e-name="dob" e-form="rowform" onbeforesave="" e-required>
+                    {{user.dob}}
+                    </td>
+                    <td style="width:35%">
+                    <span editable-text="user.contact" e-name="contact" e-form="rowform" onbeforesave="" e-required>
+                    {{user.contact}}
+                    </td>
+                    <td style="width:35%">
+                    <span editable-text="user.gender" e-name="gender" e-form="rowform" onbeforesave="" e-required>
+                    {{user.gender}}
+                    </td>
+                    <td style="width:35%">
+                        <span editable-text="user.country" e-name="country" e-form="rowform" onbeforesave="" e-required>
+                        {{user.country}}
+                    </td>
+                    <td style="width:35%">
+                        <span editable-text="user.tags" e-name="country" e-form="rowform" onbeforesave="" e-required>
+                    <tags-input ng-model="user.tags"></tags-input>
+                    </td>
+                    <td style="width:35%">
+                        <!-- <span editable-text="user.skills" e-name="country" e-form="rowform" onbeforesave="" e-required>
+                    <tags-input ng-model="user.skills"></tags-input> -->
+                    <ul ng-repeat="skill in user.skills">
+                    <span editable-text="skill" e-name="skill" e-form="rowform" onbeforesave="" e-required>
+                        <li>{{skill}}</li>
+                    </ul>
+                    </td>
+                    <td style="white-space: nowrap">
+                <!-- form -->
+                <form editable-form name="rowform" onbeforesave="updateUser($data, $index)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == user">
+                    <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
+                        save
+                    </button>
+                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
+                        cancel
+                    </button>
+                </form>
+                <div class="buttons" ng-show="!rowform.$visible">
+                    <button class="btn btn-primary" ng-click="rowform.$show()">edit</button>
+                    <button class="btn btn-danger" ng-click="removeUser($index)">del</button>
+                </div>
+            </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

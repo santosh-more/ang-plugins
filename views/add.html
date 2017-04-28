@@ -1,0 +1,92 @@
+<div class="container">
+    <form class="form-horizontal" id="form">
+        <fieldset>
+            <!-- Form Name -->
+            <legend align="center">Personal Information</legend>
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="first_name">Name</label>
+                <div class="col-md-4">
+                    <input ng-model="user.name" type="text" placeholder="First Name" class="form-control input-md" required="" uib-tooltip="Please enter the full name">
+                </div>
+            </div>
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="last_name">Email</label>
+                <div class="col-md-4">
+                    <input ng-model="user.email" type="email" placeholder="sample@gmail.com" class="form-control input-md" required="">
+                </div>
+            </div>
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="dob">Date of Birth</label>
+                <div class="col-md-4">
+                    <p class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="user.dob" is-open="popup.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                        <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+                    </p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="dob">contact</label>
+                <div class="col-md-4">
+                    <input ng-model="user.contact" type="text" class="form-control input-md" ui-mask="99-999-9999" ui-mask-placeholder ui-mask-placeholder-char="_">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="gender">gender</label>
+                <div class="col-md-4">
+                    <input ng-model="user.gender" type="text" class="form-control input-md" popover-trigger="'outsideClick'" uib-popover-template="dynamicPopover.templateUrl">
+                </div>
+            </div>
+            <script type="text/ng-template" id="myPopoverTemplate.html">
+                <div class="form-group">
+                    <label>Select Gender</label>
+                    <select type="text" ng-model="user.gender" class="form-control">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        option
+                    </select>
+                </div>
+            </script>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="country">Country</label>
+                <div class="col-md-4">
+                    <input ng-model="user.country" uib-typeahead="state for state in country_list | filter:$viewValue | limitTo:10" type="text" class="form-control input-md">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="country">Hobbies</label>
+                <div class="col-md-4">
+                    <tags-input ng-model="user.tags"></tags-input>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="country">Skills</label>
+                <div class="col-md-4">
+                    <!-- <select multiple chosen ng-model="user.skills" ng-options="s for s in country_list">
+                        <option value=""></option>
+                        </select> -->
+                    <select class="form-control" ng-model="user.skills" data-placeholder="Pick a number" multiple>
+                        <option value=""></option>
+                        <option ng-repeat="c in country_list" value="{{c}}">{{c}}</option>
+                    </select>
+                </div>
+            </div>
+            <!--  <div class="form-group">
+                <label class="col-md-4 control-label" for="gender">Profile</label>
+                <div class="col-md-4">
+                    <input ng-model="user.avatar" type="file" class="form-control input-md">
+                </div>
+            </div> -->
+            <div class="form-group">
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-primary" ng-click="saveUser()">Save</button>
+                    <button type="button" class="btn" ng-click="$dismiss()">Cancel</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
